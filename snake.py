@@ -60,8 +60,10 @@ class Snake:
         else:
             raise Exception(f"Direction not correct!: {self.dir}")
 
-        if (not increment_size) and (self.len>1):
+        #if (not increment_size) and (self.len>1):
+        if not increment_size :
             self.pos.remove(self.first)
+            self.first = self.pos[0]
         else:
             self.len += 1
         self.first = self.pos[0]

@@ -30,12 +30,17 @@ class Board:
         def food_process(self, fill):
     
             if self.check_food(fill):
+                self.eaten = True
                 self.put_food(fill)
+            else:
+                self.eaten = False
             
-
+        def normalize_fill(self, fill):
+            #return [[i[0]%self.rows, i[1]%self.col] for i in fill]
+            return [[i[0]%self.rows, i[1]%self.col] for i in fill]
+            
         def check_food(self, fill):
-        
-            if self.food in fill:
+            if self.food in self.normalize_fill(fill):
                 return True
 
             return False
