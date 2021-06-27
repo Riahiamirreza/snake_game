@@ -14,6 +14,9 @@ class Snake:
         self.columns= board_size[0]
         self.rows   = board_size[1]
 
+    def normalize_pos(self):
+        return [ [p[0]%self.rows, p[1]%self.columns] for p in self.pos]
+
     def move_toward_direction(self, step = 1, increment_size=False):
 
         temp = self.last[:]
@@ -60,7 +63,6 @@ class Snake:
         else:
             raise Exception(f"Direction not correct!: {self.dir}")
 
-        #if (not increment_size) and (self.len>1):
         if not increment_size :
             self.pos.remove(self.first)
             self.first = self.pos[0]
@@ -69,10 +71,11 @@ class Snake:
         self.first = self.pos[0]
         self.last  = self.pos[-1]
 
+        
     
     def check(self, tmp):
         
-        if tmp not in self.pos:
+        if tmp not in self.normalize_pos() and tmp not in self.pos:
             return True
         else:
             return False

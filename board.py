@@ -36,7 +36,6 @@ class Board:
                 self.eaten = False
             
         def normalize_fill(self, fill):
-            #return [[i[0]%self.rows, i[1]%self.col] for i in fill]
             return [[i[0]%self.rows, i[1]%self.col] for i in fill]
             
         def check_food(self, fill):
