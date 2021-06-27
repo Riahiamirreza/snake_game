@@ -1,4 +1,9 @@
 from random import choice
+from threading import Thread
+import sys
+import select
+import tty
+import termios
 
 class Snake:
     
@@ -13,6 +18,8 @@ class Snake:
         self.first  = pos[0]
         self.columns= board_size[0]
         self.rows   = board_size[1]
+        self.init_l = length
+        self.status = True
 
     def normalize_pos(self):
         return [ [p[0]%self.rows, p[1]%self.columns] for p in self.pos]
@@ -111,7 +118,35 @@ class Snake:
             if counter > 32:
                 raise Exception("No movement is possible")
 
+
+    def check_arrow_keys(self):
+        old_settings = termios.tcgetattr(sys.stdin)
+        try:
+            tty.setcbreak(sys.stdin.fileno())
+            while 1:
+                if self.__isData() or self.status:
+                    c = sys.stdin.read(3)
+                    if c == '\x1b[A':         
+                        self.dir = "UP"
+                    elif c == '\x1b[B':
+                        self.dir = "DOWN"
+                    elif c == '\x1b[D':
+                        self.dir = "LEFT"
+                    elif c == '\x1b[C':
+                        self.dir = "RIGHT"
+                    else:
+                        pass
+                else:
+                    return
+
+        finally:
+            termios.tcsetattr(sys.stdin, termios.TCSADRAIN, old_settings)
+                
+    def __isData(self):
+        return select.select([sys.stdin], [], [], 0) == ([sys.stdin], [], [])
+
     def __lost(self):
-        print("__LOST")
-        pass            
+        self.status = False
+        #print(f"You lost the game with score {score}")
+        #raise Exception(f"You lost the game with score {score}")
 
