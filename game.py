@@ -33,14 +33,15 @@ class Game:
             if not self.snake.status:
                 break
                 self.finish_game(t, self.score)
-            self.board.food_process(self.snake.pos)
+            self.board.food_process(self.snake.normalize_pos())
             if self.board.eaten:
                 self.score += 1
                 self.snake.move_toward_direction(increment_size=True)
             else:
                 self.snake.move_toward_direction()
-            self.board.board_init(self.snake.pos)
+            self.board.board_init(self.snake.normalize_pos())
             self.board.show_board(self.snake)
+            print(f"score:{self.score}")
             sleep(.2)
         self.finish_game(t, self.score)
             

@@ -49,7 +49,7 @@ class Board:
             
             while True:
                 x,y = randint(0,self.col-1), randint(0, self.rows-1)            
-                if [x,y] not in fill:
+                if [x,y] not in self.normalize_fill(fill):
                     self.board[x][y] = 3
                     self.food        = [x,y]
                     return
