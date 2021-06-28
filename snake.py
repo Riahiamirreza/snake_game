@@ -127,13 +127,17 @@ class Snake:
                 if self.__isData() or self.status:
                     c = sys.stdin.read(3)
                     if c == '\x1b[A':         
-                        self.dir = "UP"
+                        if self.dir != "DOWN":
+                            self.dir = "UP"
                     elif c == '\x1b[B':
-                        self.dir = "DOWN"
+                        if self.dir != "UP":
+                            self.dir = "DOWN"
                     elif c == '\x1b[D':
-                        self.dir = "LEFT"
+                        if self.dir != "RIGHT":
+                            self.dir = "LEFT"
                     elif c == '\x1b[C':
-                        self.dir = "RIGHT"
+                        if self.dir != "LEFT":
+                            self.dir = "RIGHT"
                     else:
                         pass
                 else:
