@@ -66,7 +66,7 @@ class Snake:
                 self.pos.append(temp)
             else:
                 self.__lost()
-
+        
         else:
             raise Exception(f"Direction not correct!: {self.dir}")
 
@@ -126,19 +126,24 @@ class Snake:
             while 1:
                 if self.__isData() or self.status:
                     c = sys.stdin.read(3)
+                    # Up Arrow Key Pressed
                     if c == '\x1b[A':         
                         if self.dir != "DOWN":
                             self.dir = "UP"
+                    # Down Arrow Key Pressed
                     elif c == '\x1b[B':
                         if self.dir != "UP":
                             self.dir = "DOWN"
+                    # Left Arrow Key Pressed
                     elif c == '\x1b[D':
                         if self.dir != "RIGHT":
                             self.dir = "LEFT"
+                    # Right Arrow Key Pressed
                     elif c == '\x1b[C':
                         if self.dir != "LEFT":
                             self.dir = "RIGHT"
                     else:
+                        # TODO: Clear Input Buffer If Arrow Key NOT Pressed to Keep Game Running 
                         pass
                 else:
                     return
