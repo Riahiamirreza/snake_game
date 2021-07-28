@@ -58,29 +58,32 @@ class Board:
         
         def show_board(self, snake):
             
-            board_ = ""
+            board_ = "|"
             for i in self.board:
                 for j in i:
+                    # Snake
                     if j==1:
-                        board_ += "@|"
+                        board_ += " ■"
+                    # Arrows of the snake
                     elif j==2:
-
                         if snake.dir == "UP":
-                            board_ += "^|"
+                            board_ += " ▲"
                         elif snake.dir == "LEFT":
-                            board_ += "<|"
+                            board_ += " ◀"
                         elif snake.dir == "RIGHT":
-                            board_ += ">|"
+                            board_ += " ▶"
                         elif snake.dir == "DOWN":
-                            board_ += "˅|"
+                            board_ += " ▼"
 
                     elif j==3:
-                        board_ += "*|"
+                        # Eating Stuff
+                        board_ += " ♥"
+                    # Board BackGround
                     else:
-                        board_ += " |"
+                        board_ += "⬜"
 
-                board_ += "\n"
-                board_ += "".join(["_ "*self.col])
-                board_ += "\n"
+                board_ += "|\n|"
+                # board_ += "".join(["_ "*self.col])
+                # board_ += "\n`"
                 
             print(board_)
