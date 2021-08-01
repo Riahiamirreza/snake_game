@@ -25,7 +25,8 @@ Use arrow keys to navigate the snake. If you press any key other than arrow keys
 1. Download or Clone Project
 2. Navigate To The Root of The Project
 3. Open Terminal
-    For Windows, Type ``` py main.py ``` & Press Enter
-    For Windows & Mac, Type ``` python3 main.py ``` & Press Enter
+    For Linux & Mac, Type ``` python3 main.py ``` & Press Enter    
 
-Make Sure Python3 Is Installed On Your System
+# Note: 
+1. Make Sure Python3 Is Installed On Your System
+2. This program does not work on Windows because it requires the termios module that will work only on Unix.
